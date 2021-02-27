@@ -1,0 +1,29 @@
+# To Execute a selected line press "ctrl + '"
+
+# To Configure Azure Cli
+az configure
+
+# To login to azure
+az login
+
+# Variable
+$rgName = 'rg-armtemplate'
+$location = 'West India'
+
+# Create a Azure Resource Group
+az group create `
+  --name $rgName `
+  --location $location
+
+# List Groups
+az group list
+az group list --output table
+
+# Create the template
+$templateFile = 'mnazuretemplate.json'
+$templateName = 'blankTemplate'
+
+az deployment group create `
+  --name $templateName `
+  --resource-group $rgName `
+  --template-file $templateFile
