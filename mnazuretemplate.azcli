@@ -21,7 +21,7 @@ az group list --output table
 
 # Create the template
 $templateFile = 'mnazuretemplate.json'
-$templateName = 'variableTemplate'
+$templateName = 'outputTemplate'
 $storageName = 'mnstore'
 
 # Create a storage account with the storageprefix vaiable and location will picked from the resource group
