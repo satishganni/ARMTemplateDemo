@@ -21,23 +21,11 @@ az group list --output table
 
 # Create the template
 $templateFile = 'mnazuretemplate.json'
-$templateName = 'parametersTemplate'
-$storageName = 'mnstorage1234'
-
-# Create a storage account with the storagename from parameters and the sku will be the default one 'Standard_LRS'
-az deployment group create `
-  --name $templateName `
-  --resource-group $rgName `
-  --template-file $templateFile `
-  --parameters storageName=$storageName
-
-
-# Create the template
-$templateFile = 'mnazuretemplate.json'
-$templateName = 'parametersTemplate'
+$templateName = 'functionTemplate'
 $storageName = 'mnstorage1234'
 $storageSku = 'Standard_LRS'
-# Create a storage account with the storagename and skuName from parameters
+
+# Create a storage account with the storagename and skuName from parameters and location will picked from the resource group
 az deployment group create `
   --name $templateName `
   --resource-group $rgName `

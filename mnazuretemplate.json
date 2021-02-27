@@ -17,6 +17,10 @@
         "Standard_ZRS",
         "Premium_ZRS"
       ]
+    },
+    "location": {
+      "type": "string",
+      "defaultValue": "[resourceGroup().location]"
     }
   },
   "resources": [
@@ -24,7 +28,7 @@
       "type": "Microsoft.Storage/storageAccounts",
       "apiVersion": "2019-04-01",
       "name": "[parameters('storageName')]",
-      "location": "West India",
+      "location": "[parameters('location')]",
       "sku": {
         "name": "[parameters('storageSku')]"
       },
