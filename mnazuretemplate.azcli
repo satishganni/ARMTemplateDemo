@@ -21,9 +21,19 @@ az group list --output table
 
 # Create the template
 $templateFile = 'mnazuretemplate.json'
-$templateName = 'blankTemplate'
+$templateName = 'resourceTemplate'
 
 az deployment group create `
   --name $templateName `
   --resource-group $rgName `
   --template-file $templateFile
+
+# List all storage accounts
+az storage account list
+az storage account list --output table
+az storage account list -o table
+
+# Delete storage account
+az storage account delete `
+  -n mnstorage1234 `
+  -g $rgName --no-wait --yes
