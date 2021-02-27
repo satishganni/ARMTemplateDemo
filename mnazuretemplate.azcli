@@ -21,19 +21,41 @@ az group list --output table
 
 # Create the template
 $templateFile = 'mnazuretemplate.json'
-$templateName = 'resourceTemplate'
+$templateName = 'parametersTemplate'
+$storageName = 'mnstorage1234'
 
+# Create a storage account with the storagename from parameters and the sku will be the default one 'Standard_LRS'
 az deployment group create `
   --name $templateName `
   --resource-group $rgName `
-  --template-file $templateFile
+  --template-file $templateFile `
+  --parameters storageName=$storageName
+
+
+# Create the template
+$templateFile = 'mnazuretemplate.json'
+$templateName = 'parametersTemplate'
+$storageName = 'mnstorage1234'
+$storageSku = 'Standard_LRS'
+# Create a storage account with the storagename and skuName from parameters
+az deployment group create `
+  --name $templateName `
+  --resource-group $rgName `
+  --template-file $templateFile `
+  --parameters storageName=$storageName storageSku=$storageSku
 
 # List all storage accounts
 az storage account list
 az storage account list --output table
 az storage account list -o table
 
+az storage account list -g $rgName --query '[].name' -o json
+az storage account list -g $rgName --query '[].name' -o table
+
+az storage account list -g $rgName --query '[].{Name:name, Location:location, Kind:kind}' -o json
+az storage account list -g $rgName --query '[].{Name:name, Location:location, Kind:kind, SKU:sku.name}' -o table
+
 # Delete storage account
 az storage account delete `
-  -n mnstorage1234 `
-  -g $rgName --no-wait --yes
+  -n $storageName `
+  -g $rgName --yes
