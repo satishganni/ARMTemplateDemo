@@ -46,3 +46,6 @@ az storage account list -g $rgName --query '[].{Name:name, Location:location, Ki
 az storage account delete `
   -n $storageName `
   -g $rgName --yes
+
+# Delete the resource group
+az group delete --name $rgName --no-wait --yes
